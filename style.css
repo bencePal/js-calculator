@@ -46,6 +46,9 @@ body {
     border: 1px solid #111;
     margin-bottom: 20px;
     padding: 0 10px;
+    font-size: 40px;
+    white-space: nowrap;
+    overflow-y: hidden;
 }
 #left {
     width: 252px
@@ -73,19 +76,19 @@ body {
     cursor: pointer;
     background-color: #fff;
 }
-.button.result, .button.reset {
+.button#result, .button#reset {
     height: 170px;
     line-height: 170px;
     color: #fff;
 }
-.button.result:hover, .button.reset:hover {
+.button#result:hover, .button#reset:hover {
     background-color: #fff;
     color: #222;
 }
-.button.reset {
+.button#reset {
     background-color: #ca0b0b;
 }
-.button.result {
+.button#result {
     background-color: #036903;
     
 }
