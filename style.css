@@ -25,6 +25,7 @@ body {
 
 /*calculator start*/
 #calculator {
+    background-color: #fff;
     width: 100%;
     border: 2px solid #333;
     border-radius: 2px;
@@ -59,6 +60,7 @@ body {
 #right {
     width: 80px;
 }
+
 /*button start*/
 .button {
     float: left;
@@ -92,6 +94,13 @@ body {
     background-color: #036903;
     
 }
-
 /*button end*/
+
+/*errors start*/
+.error {
+    font-size:30px;
+    color: #ca0b0b;
+}
+/*errors end*/
+
 /*calculator end*/
