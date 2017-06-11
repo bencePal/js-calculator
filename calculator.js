@@ -1,53 +1,58 @@
-var operateList = [];
+var calculator = function() {
+    var operateList = [];
 
-var operateButtonHandler = function(event) {
-    var buttonValue = this.innerHTML;
-    var displayValue = document.getElementById("display");
-    //console.log(buttonValue)
-    operateList.push(buttonValue)
-    if (buttonValue === "+" || 
-        buttonValue === "-" || 
-        buttonValue === "*" || 
-        buttonValue === "/" || 
-        buttonValue === "%")
-        {
-        displayValue.innerHTML = displayValue.innerHTML + " " + buttonValue + " ";
-    } else {
-        displayValue.innerHTML = displayValue.innerHTML + buttonValue;
-    }
-    var operateString = operateList.join("");
+    var operationButtonHandler = function() {
+        var operateButtonList = document.getElementsByClassName('operate');
 
-    return operateString
-}
+        for (var i = 0; i < operateButtonList.length; i++) {
+            operateButtonList[i].addEventListener('click', function() {
+                var buttonValue = this.innerHTML;
+                var displayValue = document.getElementById("display");
 
-var operateButtonList = document.getElementsByClassName('operate');
+                if (buttonValue === "+" || buttonValue === "-" || 
+                    buttonValue === "*" || buttonValue === "/" || buttonValue === "%") {
+                    displayValue.innerHTML += " " + buttonValue + " ";
+                } else {
+                    displayValue.innerHTML += buttonValue;
+                };
+                operateList.push(buttonValue);
+            });
+        };
+    };
 
-for (var i = 0; i < operateButtonList.length; i++) {
-    operateButtonList[i].addEventListener('click', operateButtonHandler);
-}
+    var resultButtonHandler = function () {
+        var button = document.querySelector('#result');
 
+        button.addEventListener('click', function() {
+            var operateString = operateList.join("");
+            var result;
 
-//////////////////////////////////////////
+            try {
+                result = eval(operateString);
+            } catch(error) {
+                result = '<span class="error">Invalid operation, try again!</span>';
+                document.body.style.backgroundColor = 'red';
+                console.log(error.message);
+            }
+            document.getElementById("display").innerHTML = result;
+        });
+    };
 
-var resultButtonHandler = function (event) {
-    var operateString = operateButtonHandler();
-    var result = eval(operateString)
-    document.getElementById("display").innerHTML = result;
+    var resetButtonHandler = function (event) {
+        var button = document.querySelector('#reset');
+
+        button.addEventListener('click', function() {
+            operateList = [];
+            document.body.style.backgroundColor = 'white';
+            document.getElementById("display").innerHTML = "";
+        });
+    };
+
+    //////////////////////////////
+    resetButtonHandler();
+    operationButtonHandler();
+    resultButtonHandler();
+
 };
 
-var button = document.querySelector('#result');
-button.addEventListener('click', resultButtonHandler);
-
-
-//////////////////////////////////////////
-
-var resetButtonHandler = function (event) {
-    operateList = [];
-    document.getElementById("display").innerHTML = "0";
-};
-
-
-var button = document.querySelector('#reset');
-button.addEventListener('click', resetButtonHandler);
-
-//////////////////////////////////////////
+calculator();
